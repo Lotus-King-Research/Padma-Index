@@ -25,6 +25,8 @@ jobs:
     # Runs a set of commands using the runners shell
     - name: Build Index
       run: |
+        git config --global user.email "you@example.com"
+        git config --global user.name "Your Name"
         git clone https://github.com/Lotus-King-Research/Padma-Index
         #git checkout latest
         #mv Padma-Index/Padma-Index.pkl.gz Padma-Index/Padma-Index-Previous.pkl.gz
