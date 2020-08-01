@@ -27,17 +27,22 @@ jobs:
       run: |
         git config --global user.email "mailme@mikkokotila.com"
         git config --global user.name "Mikko Kotila"
-        git clone git@github.com:Lotus-King-Research/Padma-Index.git
-        #git checkout latest
-        #mv Padma-Index/Padma-Index.pkl.gz Padma-Index/Padma-Index-Previous.pkl.gz
-        #mv Padma-Index.pkl.gz Padma-Index/Padma-Index.pkl.gz
-        cd Padma-Index
+        python Build-Padma-Index.py
+        mv Padma-Index/Padma-Index.pkl.gz Padma-Index/Padma-Index-Previous.pkl.gz
+        # gzip -9 Padma-Index.pkl
+        git checkout latest
         touch test
         git add --all
         git commit -m "latest index build"
-        git push
-        #python Build-Padma-Index.py
-        #gzip -9 Padma-Index.pkl
-        
-        
-
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.MIKKOKOTILA_TOKEN }}
+        branch: latest
+    - name: pull-request-action
+      uses: vsoch/pull-request-action@1.0.6
+      env:
+        GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+        BRANCH_PREFIX: "auto_update_"
+        PULL_REQUEST_BRANCH: "master"
+        PULL_REQUEST_FROM_BRANCH: "latest"
