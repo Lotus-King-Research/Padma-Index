@@ -25,6 +25,7 @@ jobs:
     # Runs a set of commands using the runners shell
     - name: Build Index
       run: |
+        pip install tqdm
         git config --global user.email "mailme@mikkokotila.com"
         git config --global user.name "Mikko Kotila"
         python Build-Padma-Index.py
