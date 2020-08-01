@@ -75,3 +75,12 @@ This will return a dictionary where each key is document id where the word is fo
  3003: [1230, 7643],
  3041: [370]}
  ```
+ 
+ ## Performance 
+
+It takes less than a second to query a word from the index. Every query takes the same time to perform.
+
+``` 
+%timeit TextIndex('Padma-Index.pkl').final_index['ཟུ་']
+855 ms ± 8.84 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+```
