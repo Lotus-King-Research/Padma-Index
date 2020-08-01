@@ -6,9 +6,9 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches: [ f ]
+    branches: [ master ]
   pull_request:
-    branches: [ f ]
+    branches: [ master ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -25,13 +25,15 @@ jobs:
     # Runs a set of commands using the runners shell
     - name: Build Index
       run: |
-        python Build-Padma-Index.py
-        gzip -9 Padma-Index.pkl
         git clone https://github.com/Lotus-King-Research/Padma-Index
-        git checkout latest
-        mv Padma-Index/Padma-Index.pkl.gz Padma-Index/Padma-Index-Previous.pkl.gz
-        mv Padma-Index.pkl.gz Padma-Index/Padma-Index.pkl.gz
+        #git checkout latest
+        #mv Padma-Index/Padma-Index.pkl.gz Padma-Index/Padma-Index-Previous.pkl.gz
+        #mv Padma-Index.pkl.gz Padma-Index/Padma-Index.pkl.gz
         cd Padma-Index
+        touch test
         git add --all
         git commit -m "latest index build"
         git push
+        #python Build-Padma-Index.py
+        #gzip -9 Padma-Index.pkl
+
